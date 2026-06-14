@@ -18,12 +18,12 @@ jobs:
       
       - name: Check Python syntax
         run: |
-          python -m py_compile custom_components/dwd_uv_index/*.py
-      
+          python -m py_compile custom_components/dwd_opendata/*.py
+
       - name: Validate manifest.json
         run: |
-          python -c "import json; json.load(open('custom_components/dwd_uv_index/manifest.json'))"
-      
+          python -c "import json; json.load(open('custom_components/dwd_opendata/manifest.json'))"
+
       - name: Validate strings.json
         run: |
-          python -c "import json; json.load(open('custom_components/dwd_uv_index/strings.json'))"
+          python -c "import json; json.load(open('custom_components/dwd_opendata/strings.json'))"
