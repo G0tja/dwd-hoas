@@ -39,15 +39,15 @@ primary: UV Index
 secondary: |
   {% set uv = states(entity) | int(0) %}
   {% if uv <= 2 %}
-    Low Risk
+    {{ uv }} - Low Risk
   {% elif uv <= 5 %}
-    Moderate Risk
+    {{ uv }} - Moderate Risk
   {% elif uv <= 7 %}
-    High Risk
+    {{ uv }} - High Risk
   {% elif uv <= 10 %}
-    Very High Risk
+    {{ uv }} - Very High Risk
   {% else %}
-    Extreme Risk
+    {{ uv }} - Extreme Risk
   {% endif %}
 icon: mdi:sun-wireless
 icon_color: |
@@ -74,7 +74,19 @@ cards:
   - type: custom:mushroom-template-card
     entity: sensor.dwd_uv_index_<city>_uv_today
     primary: Today
-    secondary: "{{ states(entity) }}"
+    secondary: |
+      {% set uv = states(entity) | int(0) %}
+      {% if uv <= 2 %}
+        {{ uv }} - Low Risk
+      {% elif uv <= 5 %}
+        {{ uv }} - Moderate Risk
+      {% elif uv <= 7 %}
+        {{ uv }} - High Risk
+      {% elif uv <= 10 %}
+        {{ uv }} - Very High Risk
+      {% else %}
+        {{ uv }} - Extreme Risk
+      {% endif %}
     icon: mdi:calendar-today
     icon_color: |
       {% set uv = states(entity) | int(0) %}
@@ -93,7 +105,19 @@ cards:
   - type: custom:mushroom-template-card
     entity: sensor.dwd_uv_index_<city>_uv_tomorrow
     primary: Tomorrow
-    secondary: "{{ states(entity) }}"
+    secondary: |
+      {% set uv = states(entity) | int(0) %}
+      {% if uv <= 2 %}
+        {{ uv }} - Low Risk
+      {% elif uv <= 5 %}
+        {{ uv }} - Moderate Risk
+      {% elif uv <= 7 %}
+        {{ uv }} - High Risk
+      {% elif uv <= 10 %}
+        {{ uv }} - Very High Risk
+      {% else %}
+        {{ uv }} - Extreme Risk
+      {% endif %}
     icon: mdi:calendar-plus-1
     icon_color: |
       {% set uv = states(entity) | int(0) %}
@@ -112,7 +136,19 @@ cards:
   - type: custom:mushroom-template-card
     entity: sensor.dwd_uv_index_<city>_uv_dayafter
     primary: Day After
-    secondary: "{{ states(entity) }}"
+    secondary: |
+      {% set uv = states(entity) | int(0) %}
+      {% if uv <= 2 %}
+        {{ uv }} - Low Risk
+      {% elif uv <= 5 %}
+        {{ uv }} - Moderate Risk
+      {% elif uv <= 7 %}
+        {{ uv }} - High Risk
+      {% elif uv <= 10 %}
+        {{ uv }} - Very High Risk
+      {% else %}
+        {{ uv }} - Extreme Risk
+      {% endif %}
     icon: mdi:calendar-plus-2
     icon_color: |
       {% set uv = states(entity) | int(0) %}
@@ -173,21 +209,57 @@ cards:
       - type: custom:mushroom-template-card
         entity: sensor.dwd_uv_index_<city>_uv_today
         primary: Today
-        secondary: "{{ states(entity) }}"
+        secondary: |
+          {% set uv = states(entity) | int(0) %}
+          {% if uv <= 2 %}
+            {{ uv }} - Low Risk
+          {% elif uv <= 5 %}
+            {{ uv }} - Moderate Risk
+          {% elif uv <= 7 %}
+            {{ uv }} - High Risk
+          {% elif uv <= 10 %}
+            {{ uv }} - Very High Risk
+          {% else %}
+            {{ uv }} - Extreme Risk
+          {% endif %}
         icon: mdi:calendar-today
         icon_color: orange
 
       - type: custom:mushroom-template-card
         entity: sensor.dwd_uv_index_<city>_uv_tomorrow
         primary: Tomorrow
-        secondary: "{{ states(entity) }}"
+        secondary: |
+          {% set uv = states(entity) | int(0) %}
+          {% if uv <= 2 %}
+            {{ uv }} - Low Risk
+          {% elif uv <= 5 %}
+            {{ uv }} - Moderate Risk
+          {% elif uv <= 7 %}
+            {{ uv }} - High Risk
+          {% elif uv <= 10 %}
+            {{ uv }} - Very High Risk
+          {% else %}
+            {{ uv }} - Extreme Risk
+          {% endif %}
         icon: mdi:calendar-plus-1
         icon_color: orange
 
       - type: custom:mushroom-template-card
         entity: sensor.dwd_uv_index_<city>_uv_dayafter
         primary: Day After
-        secondary: "{{ states(entity) }}"
+        secondary: |
+          {% set uv = states(entity) | int(0) %}
+          {% if uv <= 2 %}
+            {{ uv }} - Low Risk
+          {% elif uv <= 5 %}
+            {{ uv }} - Moderate Risk
+          {% elif uv <= 7 %}
+            {{ uv }} - High Risk
+          {% elif uv <= 10 %}
+            {{ uv }} - Very High Risk
+          {% else %}
+            {{ uv }} - Extreme Risk
+          {% endif %}
         icon: mdi:calendar-plus-2
         icon_color: orange
 ```
