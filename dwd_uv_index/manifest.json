@@ -1,12 +1,13 @@
 {
   "domain": "dwd_uv_index",
   "name": "DWD UV Index",
-  "version": "1.0.0",
+  "codeowners": ["@ian"],
   "config_flow": true,
-  "documentation": "https://opendata.dwd.de/climate_environment/health/alerts/",
-  "issue_tracker": "",
-  "requirements": [],
+  "documentation": "https://github.com/ian/dwd-hoas",
+  "issue_tracker": "https://github.com/ian/dwd-hoas/issues",
+  "requirements": ["aiohttp>=3.8.0", "async_timeout>=4.0.0"],
   "dependencies": [],
-  "codeowners": [],
-  "iot_class": "cloud_polling"
+  "iot_class": "cloud_polling",
+  "version": "1.0.0",
+  "homeassistant": "2024.1.0"
 }

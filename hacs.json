@@ -1,0 +1,7 @@
+{
+  "name": "DWD UV Index",
+  "content_type": "integration",
+  "version": "1.0.0",
+  "homeassistant": "2024.1.0",
+  "render_readme": true
+}
