@@ -1,0 +1,20 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "DWD UV-Index",
+        "description": "Wähle die DWD-Vorhersagestation in deiner Nähe. Die Daten stammen vom Deutschen Wetterdienst (DWD) unter {url} und werden täglich gegen 10:00 Uhr aktualisiert.",
+        "data": {
+          "city": "Station / Ort"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Verbindung zum DWD-Server nicht möglich. Bitte Internetverbindung prüfen.",
+      "unknown": "Unerwarteter Fehler. Bitte die Home Assistant Protokolle prüfen."
+    },
+    "abort": {
+      "already_configured": "Diese Station ist bereits konfiguriert."
+    }
+  }
+}

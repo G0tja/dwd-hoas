@@ -1,0 +1,12 @@
+{
+  "domain": "dwd_uv_index",
+  "name": "DWD UV Index",
+  "version": "1.0.0",
+  "config_flow": true,
+  "documentation": "https://opendata.dwd.de/climate_environment/health/alerts/",
+  "issue_tracker": "",
+  "requirements": [],
+  "dependencies": [],
+  "codeowners": [],
+  "iot_class": "cloud_polling"
+}
