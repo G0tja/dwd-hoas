@@ -1,7 +1,9 @@
 {
-  "name": "DWD UV Index",
+  "name": "DWD Opendata",
   "content_type": "integration",
   "version": "1.0.0",
   "homeassistant": "2024.1.0",
-  "render_readme": true
+  "render_readme": true,
+  "domains": ["sensor"],
+  "iot_class": "cloud_polling"
 }

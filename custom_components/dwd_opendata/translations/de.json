@@ -1,0 +1,30 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "DWD Opendata",
+        "description": "Wählen Sie eine Stadt aus, um Vorhersagen für UV-Index und Pollenflug vom DWD zu erhalten.\n\nVerfügbare Städte werden abgerufen von: {uvi_url}",
+        "data": {
+          "city": "Stadt"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Verbindung zu DWD-Servern fehlgeschlagen",
+      "unknown": "Ein unerwarteter Fehler ist aufgetreten"
+    }
+  },
+  "entity": {
+    "sensor": {
+      "uv_today": {
+        "name": "UV-Index Heute"
+      },
+      "uv_tomorrow": {
+        "name": "UV-Index Morgen"
+      },
+      "uv_dayafter": {
+        "name": "UV-Index Übermorgen"
+      }
+    }
+  }
+}

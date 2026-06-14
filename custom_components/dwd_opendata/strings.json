@@ -1,0 +1,30 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "DWD Opendata",
+        "description": "Select a city to get UV Index and pollen forecasts from DWD Opendata.\n\nAvailable cities are fetched from: {uvi_url}",
+        "data": {
+          "city": "City"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect to DWD servers",
+      "unknown": "An unexpected error occurred"
+    }
+  },
+  "entity": {
+    "sensor": {
+      "uv_today": {
+        "name": "UV Index Today"
+      },
+      "uv_tomorrow": {
+        "name": "UV Index Tomorrow"
+      },
+      "uv_dayafter": {
+        "name": "UV Index Day After Tomorrow"
+      }
+    }
+  }
+}

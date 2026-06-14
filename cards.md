@@ -269,3 +269,327 @@ cards:
 - **Entity not found**: Make sure your sensor entity exists. Check in Developer Tools → States
 - **Icons not showing**: Verify you're using valid Material Design Icons (MDI) names
 - **Colors not updating**: Check the template syntax in your YAML
+
+---
+
+# Displaying Pollen Forecasts with Mushroom Cards
+
+This section shows how to display the DWD Pollen forecast data using the [Mushroom Card](https://github.com/piitaya/lovelace-mushroom) template. Based on examples from the [DWD Pollenflug](https://github.com/mampfes/hacs_dwd_pollenflug) project.
+
+## Prerequisites
+
+1. Install the [Mushroom Cards](https://github.com/piitaya/lovelace-mushroom) custom component from HACS
+2. Have the DWD Opendata integration installed and configured
+3. Replace `<region_id>` with your configured region ID (shown in entity names like `sensor.pollen_graeser_124`)
+
+## Pollen Index Scale
+
+| Index | Description (German) | Status  | Color |
+|-------|----------------------|---------|-------|
+| 0     | keine Belastung      | None    | 🟢 green |
+| 0.5   | keine bis geringe    | Low     | 🟢 green |
+| 1     | geringe Belastung    | Low     | 🟢 green |
+| 1.5   | geringe bis mittlere  | Medium  | 🟡 orange |
+| 2     | mittlere Belastung   | Medium  | 🟡 orange |
+| 2.5   | mittlere bis hohe    | High    | 🔴 red |
+| 3     | hohe Belastung       | High    | 🔴 red |
+
+## Minimal Pollen Grid (All 8 Pollen Types)
+
+```yaml
+square: true
+type: grid
+columns: 4
+cards:
+  - type: custom:mushroom-template-card
+    entity: sensor.pollen_graeser_<region_id>
+    primary: Gras
+    icon: mdi:grass
+    layout: vertical
+    icon_color: |-
+      {% if states(config.entity) | float <= 1 %}
+        green
+      {% elif states(config.entity) | float <= 2 %}
+        orange
+      {% else %}
+        red
+      {% endif %}
+    tap_action:
+      action: more-info
+
+  - type: custom:mushroom-template-card
+    entity: sensor.pollen_ambrosia_<region_id>
+    primary: Ambrosia
+    icon: mdi:flower-pollen
+    layout: vertical
+    icon_color: |-
+      {% if states(config.entity) | float <= 1 %}
+        green
+      {% elif states(config.entity) | float <= 2 %}
+        orange
+      {% else %}
+        red
+      {% endif %}
+    tap_action:
+      action: more-info
+
+  - type: custom:mushroom-template-card
+    entity: sensor.pollen_birke_<region_id>
+    primary: Birke
+    icon: mdi:flower-pollen
+    layout: vertical
+    icon_color: |-
+      {% if states(config.entity) | float <= 1 %}
+        green
+      {% elif states(config.entity) | float <= 2 %}
+        orange
+      {% else %}
+        red
+      {% endif %}
+    tap_action:
+      action: more-info
+
+  - type: custom:mushroom-template-card
+    entity: sensor.pollen_erle_<region_id>
+    primary: Erle
+    icon: mdi:flower-pollen
+    layout: vertical
+    icon_color: |-
+      {% if states(config.entity) | float <= 1 %}
+        green
+      {% elif states(config.entity) | float <= 2 %}
+        orange
+      {% else %}
+        red
+      {% endif %}
+    tap_action:
+      action: more-info
+
+  - type: custom:mushroom-template-card
+    entity: sensor.pollen_hasel_<region_id>
+    primary: Hasel
+    icon: mdi:flower-pollen
+    layout: vertical
+    icon_color: |-
+      {% if states(config.entity) | float <= 1 %}
+        green
+      {% elif states(config.entity) | float <= 2 %}
+        orange
+      {% else %}
+        red
+      {% endif %}
+    tap_action:
+      action: more-info
+
+  - type: custom:mushroom-template-card
+    entity: sensor.pollen_esche_<region_id>
+    primary: Esche
+    icon: mdi:flower-pollen
+    layout: vertical
+    icon_color: |-
+      {% if states(config.entity) | float <= 1 %}
+        green
+      {% elif states(config.entity) | float <= 2 %}
+        orange
+      {% else %}
+        red
+      {% endif %}
+    tap_action:
+      action: more-info
+
+  - type: custom:mushroom-template-card
+    entity: sensor.pollen_beifuss_<region_id>
+    primary: Beifuss
+    icon: mdi:flower-pollen
+    layout: vertical
+    icon_color: |-
+      {% if states(config.entity) | float <= 1 %}
+        green
+      {% elif states(config.entity) | float <= 2 %}
+        orange
+      {% else %}
+        red
+      {% endif %}
+    tap_action:
+      action: more-info
+
+  - type: custom:mushroom-template-card
+    entity: sensor.pollen_roggen_<region_id>
+    primary: Roggen
+    icon: mdi:flower-pollen
+    layout: vertical
+    icon_color: |-
+      {% if states(config.entity) | float <= 1 %}
+        green
+      {% elif states(config.entity) | float <= 2 %}
+        orange
+      {% else %}
+        red
+      {% endif %}
+    tap_action:
+      action: more-info
+```
+
+## Pollen Forecast with Description
+
+Shows today's and tomorrow's forecast with German descriptions:
+
+```yaml
+square: true
+type: grid
+columns: 2
+cards:
+  - type: custom:mushroom-template-card
+    entity: sensor.pollen_graeser_<region_id>
+    primary: Gras
+    secondary: |-
+      Today: {{ state_attr('sensor.pollen_graeser_<region_id>', 'state_today_desc') }}
+      Tomorrow: {{ state_attr('sensor.pollen_graeser_<region_id>', 'state_tomorrow_desc') }}
+    icon: mdi:grass
+    layout: vertical
+    icon_color: |-
+      {% if states(config.entity) | float <= 1 %}
+        green
+      {% elif states(config.entity) | float <= 2 %}
+        orange
+      {% else %}
+        red
+      {% endif %}
+    multiline_secondary: true
+    tap_action:
+      action: more-info
+
+  - type: custom:mushroom-template-card
+    entity: sensor.pollen_erle_<region_id>
+    primary: Erle
+    secondary: |-
+      Today: {{ state_attr('sensor.pollen_erle_<region_id>', 'state_today_desc') }}
+      Tomorrow: {{ state_attr('sensor.pollen_erle_<region_id>', 'state_tomorrow_desc') }}
+    icon: mdi:flower-pollen
+    layout: vertical
+    icon_color: |-
+      {% if states(config.entity) | float <= 1 %}
+        green
+      {% elif states(config.entity) | float <= 2 %}
+        orange
+      {% else %}
+        red
+      {% endif %}
+    multiline_secondary: true
+    tap_action:
+      action: more-info
+```
+
+## Combined UV Index and Pollen Dashboard
+
+```yaml
+type: vertical-stack
+cards:
+  - type: heading
+    heading: Weather Forecasts
+    heading_tag: h2
+
+  - type: heading
+    heading: UV Index
+    heading_tag: h3
+
+  - type: grid
+    columns: 3
+    cards:
+      - type: custom:mushroom-template-card
+        entity: sensor.berlin_uv_today
+        primary: Today
+        icon: mdi:sun-wireless
+        icon_color: orange
+
+      - type: custom:mushroom-template-card
+        entity: sensor.berlin_uv_tomorrow
+        primary: Tomorrow
+        icon: mdi:sun-wireless-outline
+        icon_color: orange
+
+      - type: custom:mushroom-template-card
+        entity: sensor.berlin_uv_dayafter
+        primary: Day After
+        icon: mdi:sun-wireless-outline
+        icon_color: orange
+
+  - type: heading
+    heading: Pollen Forecast
+    heading_tag: h3
+
+  - type: grid
+    columns: 4
+    square: true
+    cards:
+      - type: custom:mushroom-template-card
+        entity: sensor.pollen_graeser_<region_id>
+        primary: Gras
+        icon: mdi:grass
+        layout: vertical
+        icon_color: |-
+          {% if states(config.entity) | float <= 1 %}
+            green
+          {% elif states(config.entity) | float <= 2 %}
+            orange
+          {% else %}
+            red
+          {% endif %}
+
+      - type: custom:mushroom-template-card
+        entity: sensor.pollen_erle_<region_id>
+        primary: Erle
+        icon: mdi:flower-pollen
+        layout: vertical
+        icon_color: |-
+          {% if states(config.entity) | float <= 1 %}
+            green
+          {% elif states(config.entity) | float <= 2 %}
+            orange
+          {% else %}
+            red
+          {% endif %}
+
+      - type: custom:mushroom-template-card
+        entity: sensor.pollen_birke_<region_id>
+        primary: Birke
+        icon: mdi:flower-pollen
+        layout: vertical
+        icon_color: |-
+          {% if states(config.entity) | float <= 1 %}
+            green
+          {% elif states(config.entity) | float <= 2 %}
+            orange
+          {% else %}
+            red
+          {% endif %}
+
+      - type: custom:mushroom-template-card
+        entity: sensor.pollen_hasel_<region_id>
+        primary: Hasel
+        icon: mdi:flower-pollen
+        layout: vertical
+        icon_color: |-
+          {% if states(config.entity) | float <= 1 %}
+            green
+          {% elif states(config.entity) | float <= 2 %}
+            orange
+          {% else %}
+            red
+          {% endif %}
+```
+
+## Customization Tips
+
+- **Entity IDs**: Find your pollen region ID in Home Assistant Developer Tools → States (e.g., `sensor.pollen_graeser_124` has region_id `124`)
+- **Colors**: Pollen uses 3-tier system (green ≤1, orange ≤2, red >2) vs UV's 5-tier system
+- **Attributes**: Each pollen sensor includes `state_today_desc`, `state_tomorrow_desc`, `state_in_2_days_desc` for German descriptions
+- **Icons**: Use `mdi:grass` for grass, `mdi:flower-pollen` for other pollen types, or other pollen-related MDI icons
+
+---
+
+## References
+
+- [Original DWD Pollenflug Integration](https://github.com/mampfes/hacs_dwd_pollenflug) - The pollen forecast component that inspired this unified integration
+- [DWD Pollen Information](https://www.dwd.de/DE/leistungen/gefahrenindizespollen/gefahrenindexpollen.html) - Official German Meteorological Service (DWD) pollen information
+- [Mushroom Cards](https://github.com/piitaya/lovelace-mushroom) - Custom Lovelace card component used in these examples
